@@ -2,37 +2,58 @@
 
 void User::init(const unsigned int id, const std::string& username, const unsigned int age)
 {
+    this->_id = id;
+    this->_username = username;
+    this->_age = age;
+    this->_devices.init();
 }
 
 void User::clear()
 {
+    this->_devices.clear();
+    this->_age = 0;
+    this->_id = 0;
+    this->_username = "";
 }
 
 void User::addDevice(const Device newDevice)
 {
+    this->_devices.add(newDevice);
 }
 
 bool User::checkIfDevicesAreOn() const
 {
-    return false;
+    DeviceNode* tempDevices = this->_devices.get_first();
+    bool devicesOn = true;
+
+    while (tempDevices)
+    {
+        if (!tempDevices->get_data().isActive())
+        {
+            devicesOn = false;
+        }
+        tempDevices = tempDevices->get_next();
+    }
+
+    return devicesOn;
 }
 
 unsigned int User::getID() const
 {
-    return 0;
+    return this->_id;
 }
 
 std::string User::getUserName() const
 {
-    return std::string();
+    return this->_username;
 }
 
 unsigned int User::getAge() const
 {
-    return 0;
+    return this->_age;
 }
 
-DevicesList& User::getDevices() const
+DevicesList& User::getDevices()
 {
-    // TODO: insert return statement here
+    return this->_devices;
 }
