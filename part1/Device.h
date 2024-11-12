@@ -49,8 +49,8 @@ public:
 	bool isActive() const;
 
 private:
-	unsigned int id;
-	DeviceType type;
-	std::string os;
-	bool active;
+	unsigned int _id;
+	DeviceType _type;
+	std::string _os;
+	bool _active;
 };
