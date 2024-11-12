@@ -26,6 +26,7 @@ bool User::checkIfDevicesAreOn() const
     DeviceNode* tempDevices = this->_devices.get_first();
     bool devicesOn = true;
 
+    //move through all devices an list and check if they are on
     while (tempDevices)
     {
         if (!tempDevices->get_data().isActive())
