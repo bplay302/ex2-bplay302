@@ -9,7 +9,6 @@ void Profile::init(const User& owner)
 
 void Profile::clear()
 {
-    this->_owner.clear();
     this->_page.clearPage();
     this->_friendsList.clear();
 }
@@ -22,6 +21,41 @@ void Profile::addPostToProfilePage(const std::string& post)
 void Profile::addFriend(const User friendToAdd)
 {
     this->_friendsList.add(friendToAdd);
+}
+
+void Profile::changeAllWordsInStatus(const std::string& word)
+{
+    size_t wordStart = 0, wordEnd = 0;
+    std::string statusStr = this->_page.getStatus();
+
+    std::string newStatus = "";
+
+    while (wordStart != std::string::npos)
+    {
+        wordStart = statusStr.find_first_not_of(' ', wordStart);
+        wordEnd = statusStr.find_first_of(' ', wordStart);
+
+        statusStr.replace(wordStart, (wordEnd - wordStart), word);
+    }
+
+}
+
+void Profile::changeWordInStatus(const std::string& word_to_replace, const std::string& new_word)
+{
+    // Find the first occurrence of the substring
+    size_t pos = this->_page.getStatus().find(word_to_replace);
+
+    // Iterate through the string and replace all
+    // occurrences
+    while (pos != std::string::npos) 
+    {
+        // Replace the substring with the specified string
+        this->_page.getStatus().replace(pos, word_to_replace.size(), new_word);
+
+        // Find the next occurrence of the substring
+        pos = this->_page.getStatus().find(word_to_replace,
+            pos + new_word.size());
+    }
 }
 
 User Profile::getOwner() const
@@ -70,8 +104,11 @@ std::string Profile::getFriendsWithSameNameLength()
         friendUser = friendUser->get_next();
     }
 
-    friendsString.pop_back();
-
+    if (!friendsString.empty())
+    {
+        friendsString.pop_back();
+    }
+   
     return friendsString;
 }
 

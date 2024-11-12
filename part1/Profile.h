@@ -15,6 +15,10 @@ public:
 
 	void addFriend(const User friendToAdd);
 
+	void changeAllWordsInStatus(const std::string& word);
+
+	void changeWordInStatus(const std::string& word_to_replace, const std::string& new_word);
+
 	//getters
 	User getOwner() const;
 	std::string getPage() const;
