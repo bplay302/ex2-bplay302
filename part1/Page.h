@@ -4,10 +4,19 @@
 class Page
 {
 public:
+	/*
+	* create an empty page
+	*/
 	void init();
 
+	/*
+	* delete ol posts (doesn't clear status)
+	*/
 	void clearPage();
 
+	/*
+	* add post to page data
+	*/
 	void addLineToPosts(const std::string& newLine);
 
 	//setters
