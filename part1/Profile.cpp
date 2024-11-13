@@ -30,14 +30,6 @@ void Profile::changeAllWordsInStatus(const std::string& word)
 
     std::string newStatus = "";
 
-    while (wordStart != std::string::npos)
-    {
-        wordStart = statusStr.find_first_not_of(' ', wordStart);
-        wordEnd = statusStr.find_first_of(' ', wordStart);
-
-        statusStr.replace(wordStart, (wordEnd - wordStart), word);
-    }
-
 }
 
 void Profile::changeWordInStatus(const std::string& word_to_replace, const std::string& new_word)

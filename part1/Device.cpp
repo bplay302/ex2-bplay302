@@ -5,7 +5,7 @@ void Device::init(const unsigned int id, const DeviceType type, const std::strin
     this->_id = id;
     this->_type = type;
     this->_os = os;
-    _active = true;
+    this->_active = true;
 }
 
 unsigned int Device::getID() const
