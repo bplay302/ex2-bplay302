@@ -9,7 +9,7 @@ void SocialNetwork::init(const std::string& networkName, const unsigned int minA
 
 void SocialNetwork::clear()
 {
-    this->_minAge = 1000;
+    this->_minAge = 1000; //set min age to a large value for reset
     this->_Name = "";
     this->_profiles.clear();
 }
@@ -43,15 +43,18 @@ std::string SocialNetwork::getWindowsDevices() const
     ProfileNode* profileTmp = this->_profiles.get_first();
     std::string windowDevicesStr = "";
 
+    //move through all profiles in the social network
     while (profileTmp)
     {
         userDeviceTmp = profileTmp->get_data().getOwner().getDevices().get_first();
-
+        //move through all devices in user's Devices
         while (userDeviceTmp)
         {
-            std::string ID = std::to_string(userDeviceTmp->get_data().getID());
+            std::string ID = std::to_string(userDeviceTmp->get_data().getID()); //device's ID as a string
             std::string OS = userDeviceTmp->get_data().getOS();
-            if (OS == WINDOWS10 || OS == WINDOWS11 || OS == WINDOWS7)
+
+            //add active window devices to string
+            if (userDeviceTmp->get_data().isActive() && (OS == WINDOWS10 || OS == WINDOWS11 || OS == WINDOWS7))
             {
                 windowDevicesStr += '[' + ID + ", " + OS + "], ";
             }
@@ -62,6 +65,7 @@ std::string SocialNetwork::getWindowsDevices() const
         profileTmp = profileTmp->get_next();
     }
     
+    //remove last ", " from the string
     windowDevicesStr.pop_back();
     windowDevicesStr.pop_back();
 
