@@ -74,7 +74,7 @@ std::string Profile::getFriends() const
     UserNode* friendUser = this->_friendsList.get_first();
     std::string friendsString = "";
 
-
+    //move through all friends and add their user name to the string, sperated by ',' 
     while (friendUser)
     {
         friendsString += friendUser->get_data().getUserName() + ',';
@@ -82,7 +82,11 @@ std::string Profile::getFriends() const
         friendUser = friendUser->get_next();
     }
     
-   friendsString.pop_back();
+    //remove ',' in the end of the string
+    if (!friendsString.empty())
+    {
+        friendsString.pop_back();
+    }
 
    return friendsString;
 }
@@ -92,9 +96,10 @@ std::string Profile::getFriendsWithSameNameLength()
     UserNode* friendUser = this->_friendsList.get_first();
     std::string friendsString = "";
 
-
+    //move through all friends
     while (friendUser)
     {
+        // if their user name length is the same as the user, add it to the string, sperated by ',' 
         if (friendUser->get_data().getUserName().length() == 
             this->_owner.getUserName().length())
         {
@@ -104,6 +109,7 @@ std::string Profile::getFriendsWithSameNameLength()
         friendUser = friendUser->get_next();
     }
 
+    //remove ',' in the end of the string
     if (!friendsString.empty())
     {
         friendsString.pop_back();
