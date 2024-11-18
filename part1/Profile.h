@@ -30,10 +30,18 @@ public:
 	*/
 	void addFriend(const User friendToAdd);
 
-	//BONOS: in constarction
+	/*
+	* change all the word in the status to one word (keep spaces the same)
+	* \param word to replace all words
+	*/
 	void changeAllWordsInStatus(const std::string& word);
+
+	/*
+	* change all apearances of a word in a defferent word
+	* \param word in status to replace
+	* \param a word to replace by
+	*/
 	void changeWordInStatus(const std::string& word_to_replace, const std::string& new_word);
-	//--------------------- 
 	
 
 	//getters

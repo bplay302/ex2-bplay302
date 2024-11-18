@@ -30,6 +30,18 @@ void Profile::changeAllWordsInStatus(const std::string& word)
 
     std::string newStatus = "";
 
+    wordStart = statusStr.find_first_not_of(' ');
+    wordEnd = statusStr.find_first_of(' ', wordStart);
+
+    while (wordStart != std::string::npos)
+    {
+        statusStr = statusStr.replace(wordStart, (wordEnd - wordStart), word);
+
+        wordStart = statusStr.find_first_not_of(' ', wordStart + word.length());
+        wordEnd = statusStr.find_first_of(' ', wordStart);
+    }
+
+    this->_page.setStatus(statusStr);
 }
 
 void Profile::changeWordInStatus(const std::string& word_to_replace, const std::string& new_word)
@@ -42,7 +54,7 @@ void Profile::changeWordInStatus(const std::string& word_to_replace, const std::
     while (pos != std::string::npos) 
     {
         // Replace the substring with the specified string
-        this->_page.getStatus().replace(pos, word_to_replace.size(), new_word);
+        this->_page.setStatus(this->_page.getStatus().replace(pos, word_to_replace.size(), new_word));
 
         // Find the next occurrence of the substring
         pos = this->_page.getStatus().find(word_to_replace,
