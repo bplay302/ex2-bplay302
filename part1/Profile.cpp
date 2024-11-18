@@ -30,33 +30,38 @@ void Profile::changeAllWordsInStatus(const std::string& word)
 
     std::string newStatus = "";
 
+    //the first word start pos
     wordStart = statusStr.find_first_not_of(' ');
+    //the first word end pos
     wordEnd = statusStr.find_first_of(' ', wordStart);
 
+    //go through all words
     while (wordStart != std::string::npos)
     {
+        //replace word with word to replace
         statusStr = statusStr.replace(wordStart, (wordEnd - wordStart), word);
 
+        // find the next word start and end pos
         wordStart = statusStr.find_first_not_of(' ', wordStart + word.length());
         wordEnd = statusStr.find_first_of(' ', wordStart);
     }
 
+    //set the status to the corrected one
     this->_page.setStatus(statusStr);
 }
 
 void Profile::changeWordInStatus(const std::string& word_to_replace, const std::string& new_word)
 {
-    // Find the first occurrence of the substring
+    // Find the first apearence of the word
     size_t pos = this->_page.getStatus().find(word_to_replace);
 
-    // Iterate through the string and replace all
-    // occurrences
+    // go through all apearences of the word and replace it with the new word
     while (pos != std::string::npos) 
     {
-        // Replace the substring with the specified string
+        // replace the word with replace word
         this->_page.setStatus(this->_page.getStatus().replace(pos, word_to_replace.size(), new_word));
 
-        // Find the next occurrence of the substring
+        // Find the next apearance of the word
         pos = this->_page.getStatus().find(word_to_replace,
             pos + new_word.size());
     }
